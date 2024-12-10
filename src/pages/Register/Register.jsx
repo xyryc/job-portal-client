@@ -1,11 +1,13 @@
 import Lottie from "lottie-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import registerLottieData from "../../assets/lottie/register.json";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -19,6 +21,21 @@ const Register = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
+
+    // create user
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            console.log("profile updated at firebase");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => console.log(error.message));
   };
 
   return (
