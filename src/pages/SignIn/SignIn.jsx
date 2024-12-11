@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext/AuthContext";
 import Lottie from "lottie-react";
 import signInLottieData from "../../assets/lottie/signin.json";
+import SocialLogin from "../shared/SocialLogin";
 
 const SignIn = () => {
-  const { signInUser, setUser } = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -39,6 +40,8 @@ const SignIn = () => {
           Login to your account
         </h2>
         <div className="border-b-[1px] my-4"></div>
+
+        <SocialLogin />
 
         <form onSubmit={handleSubmit} className="space-y-2">
           <div className="form-control">
