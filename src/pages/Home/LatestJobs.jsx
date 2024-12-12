@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import JobCard from "./JobCard";
+import Heading from "../shared/Heading";
 
 const LatestJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -11,10 +12,17 @@ const LatestJobs = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {jobs.map((job) => (
-        <JobCard key={job._id} job={job} />
-      ))}
+    <div>
+      <Heading
+        title={"Jobs of the day"}
+        subTitle={"Search and connect with your dream company"}
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {jobs.map((job) => (
+          <JobCard key={job._id} job={job} />
+        ))}
+      </div>
     </div>
   );
 };
