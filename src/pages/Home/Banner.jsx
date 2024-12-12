@@ -17,7 +17,7 @@ const Banner = () => {
         <button className="btn btn-info text-white">Get Started</button>
       </div>
 
-      <div>
+      <div className="hidden md:block">
         <motion.img
           animate={{ y: [30, 0, 30] }}
           transition={{ duration: 5, repeat: Infinity, ease: easeInOut }}
