@@ -19,15 +19,19 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink  to={"/"}>Home</NavLink>
+        <NavLink to={"/"}>Home</NavLink>
       </li>
 
       <li>
-        <NavLink  to={"/myApplications"}>My Applications</NavLink>
+        <NavLink to={"/myApplications"}>My Applications</NavLink>
       </li>
 
       <li>
-        <NavLink  to={"/addJob"}>Add a Job</NavLink>
+        <NavLink to={"/addJob"}>Add a Job</NavLink>
+      </li>
+
+      <li>
+        <NavLink to={"/myPostedJobs"}>My Posted Jobs</NavLink>
       </li>
     </>
   );
@@ -69,7 +73,10 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
-            <button className="btn btn-outline btn-info" onClick={handleSignOut}>
+            <button
+              className="btn btn-outline btn-info"
+              onClick={handleSignOut}
+            >
               Sign out
             </button>
           </>

@@ -1,42 +1,44 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { FaRegTrashCan } from "react-icons/fa6";
+import Heading from "../shared/Heading";
+import { Link } from "react-router-dom";
 
-const MyApplications = () => {
-  const { user } = useAuth();
+const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/job-applications/?email=${user.email}`)
+    fetch(`http://localhost:5000/jobs?email=${user?.email}`)
       .then((res) => res.json())
-      .then((data) => {
-        setJobs(data);
-      });
-  }, [user.email]);
+      .then((data) => setJobs(data));
+  }, [user?.email]);
 
   return (
     <div>
-      <h1 className="my-3 font-bold text-xl text-center">
-        Applied Jobs: {jobs.length}
-      </h1>
+      <Heading
+        title={`My Posted Jobs: ${jobs.length}`}
+        subTitle={"You can post more jobs from post a job page"}
+      />
 
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th></th>
+              <th>Index</th>
               <th>Applied Company</th>
               <th>Applied Position</th>
-              <th>HR Name</th>
-              <th>Actions</th>
+              <th>Application Deadline</th>
+              <th>Application Count</th>
+              <th>Applications</th>
             </tr>
           </thead>
           <tbody>
             {/* row 1 */}
-            {jobs.map((job) => (
+            {jobs.map((job, index) => (
               <tr key={job._id}>
-                <th></th>
+                <th>{index + 1}</th>
                 <td>
                   <div className="flex items-center gap-3">
                     <div className="avatar">
@@ -63,11 +65,15 @@ const MyApplications = () => {
                     {job.category}
                   </span>
                 </td>
-                <td className="font-medium">{job.hr_name}</td>
+                <td>{job.applicationDeadline}</td>
+                <td>{job.applicationCount}</td>
                 <th>
-                  <button className="btn btn-ghost btn-sm">
-                    <FaRegTrashCan />
-                  </button>
+                  <Link
+                    to={`/viewApplications/${job._id}`}
+                    className="btn btn-link text-error"
+                  >
+                    View Applications
+                  </Link>
                 </th>
               </tr>
             ))}
@@ -78,4 +84,4 @@ const MyApplications = () => {
   );
 };
 
-export default MyApplications;
+export default MyPostedJobs;
