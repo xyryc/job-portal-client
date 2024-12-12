@@ -13,10 +13,12 @@ const LatestJobs = () => {
 
   return (
     <div>
-      <Heading
-        title={"Jobs of the day"}
-        subTitle={"Search and connect with your dream company"}
-      />
+      <div className="py-14">
+        <Heading
+          title={"Jobs of the day"}
+          subTitle={"Search and connect with your dream company"}
+        />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {jobs.map((job) => (
