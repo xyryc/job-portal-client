@@ -1,9 +1,37 @@
 import { useLoaderData } from "react-router-dom";
 import Heading from "../shared/Heading";
+import Swal from "sweetalert2";
 
 const ViewApplications = () => {
   const applicationData = useLoaderData();
-  console.log(applicationData);
+
+  const handleStatusUpdate = (e, id) => {
+    const data = {
+      status: e.target.value,
+    };
+
+    fetch(`http://localhost:5000/job-applications/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Status Updated",
+            showConfirmButton: false,
+            timer: 800,
+          });
+        }
+      });
+  };
 
   return (
     <div>
@@ -16,9 +44,9 @@ const ViewApplications = () => {
             <tr>
               <th>Index</th>
               <th>Applicants Email</th>
-              <th>Applicants Github</th>
-              <th>Applicants LinkedIn</th>
-              <th>Applicants Resume</th>
+              <th>Applicants Github, LinkedIn, Resume</th>
+
+              <th className="text-center">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -27,9 +55,48 @@ const ViewApplications = () => {
               <tr key={application._id}>
                 <th>{index + 1}</th>
                 <td>{application.applicant_email}</td>
-                <td>{application.github}</td>
-                <td>{application.linkedIn}</td>
-                <td>{application.resume}</td>
+                <td className="space-x-3">
+                  <a
+                    className="btn-link"
+                    href={application.github}
+                    target="_blank"
+                  >
+                    Github
+                  </a>
+
+                  <span>
+                    <a
+                      className="btn-link"
+                      href={application.linkedIn}
+                      target="_blank"
+                    >
+                      LinkedIn
+                    </a>
+                  </span>
+
+                  <span>
+                    <a
+                      className="btn-link"
+                      href={application.resume}
+                      target="_blank"
+                    >
+                      Resume
+                    </a>
+                  </span>
+                </td>
+                <td>
+                  <select
+                    onChange={(e) => handleStatusUpdate(e, application._id)}
+                    defaultValue={application.status || "Change Status"}
+                    className="select select-bordered select-xs w-full max-w-xs text-center"
+                  >
+                    <option disabled>Change Status</option>
+                    <option value="Reviewing">Reviewing</option>
+                    <option value="Set Interview">Set Interview</option>
+                    <option value="Hired">Hired</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                </td>
               </tr>
             ))}
           </tbody>

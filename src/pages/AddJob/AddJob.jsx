@@ -100,10 +100,13 @@ const AddJob = () => {
         <div>
           <label className="block text-gray-700 font-medium">Job Type</label>
           <select
+            defaultValue=""
             name="jobType"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="">Select Job Type</option>
+            <option value="" disabled>
+              Select Job Type
+            </option>
             <option value="Fulltime">Fulltime</option>
             <option value="Parttime">Parttime</option>
             <option value="Intern">Intern</option>
@@ -115,10 +118,13 @@ const AddJob = () => {
         <div>
           <label className="block text-gray-700 font-medium">Category</label>
           <select
+            defaultValue=""
             name="category"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="">Select Category</option>
+            <option value="" disabled>
+              Select Category
+            </option>
             <option value="Engineering">Engineering</option>
             <option value="Marketing">Marketing</option>
             <option value="Finance">Finance</option>
@@ -154,10 +160,11 @@ const AddJob = () => {
         <div>
           <label className="block text-gray-700 font-medium">Currency</label>
           <select
+            defaultValue=""
             name="currency"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="">Select Currency</option>
+            <option value="" disabled>Select Currency</option>
             <option value="RUB">Ruble</option>
             <option value="BDT">Taka</option>
             <option value="EUR">Euro</option>

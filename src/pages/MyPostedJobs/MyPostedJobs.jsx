@@ -27,11 +27,11 @@ const MyPostedJobs = () => {
           <thead>
             <tr>
               <th>Index</th>
-              <th>Applied Company</th>
-              <th>Applied Position</th>
-              <th>Application Deadline</th>
-              <th>Application Count</th>
-              <th>Applications</th>
+              <th>Company</th>
+              <th>Position</th>
+              <th className="text-center">Application Deadline</th>
+              <th className="text-center">Applicant Count</th>
+              <th className="text-center">Applications</th>
             </tr>
           </thead>
           <tbody>
@@ -65,9 +65,9 @@ const MyPostedJobs = () => {
                     {job.category}
                   </span>
                 </td>
-                <td>{job.applicationDeadline}</td>
-                <td>{job.applicationCount}</td>
-                <th>
+                <td className="text-center">{job.applicationDeadline}</td>
+                <td className="text-center">{job.applicationCount}</td>
+                <th className="text-center">
                   <Link
                     to={`/viewApplications/${job._id}`}
                     className="btn btn-link text-error"
