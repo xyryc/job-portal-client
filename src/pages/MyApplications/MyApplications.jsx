@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { FaRegTrashCan } from "react-icons/fa6";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
+
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
     // fetch(`http://localhost:5000/job-applications/?email=${user.email}`)
@@ -14,10 +17,14 @@ const MyApplications = () => {
     //     setJobs(data);
     //   });
 
-    axios
-      .get(`http://localhost:5000/job-applications/?email=${user.email}`, {
-        withCredentials: true,
-      })
+    // axios
+    //   .get(`http://localhost:5000/job-applications/?email=${user.email}`, {
+    //     withCredentials: true,
+    //   })
+    //   .then((res) => setJobs(res.data));
+
+    axiosSecure
+      .get(`/job-applications/?email=${user.email}`)
       .then((res) => setJobs(res.data));
   }, [user.email]);
 
