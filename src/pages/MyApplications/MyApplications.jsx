@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { FaRegTrashCan } from "react-icons/fa6";
-import axios from "axios";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
@@ -11,14 +10,14 @@ const MyApplications = () => {
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    // fetch(`http://localhost:5000/job-applications/?email=${user.email}`)
+    // fetch(`https://job-square-server.vercel.app/job-applications/?email=${user.email}`)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setJobs(data);
     //   });
 
     // axios
-    //   .get(`http://localhost:5000/job-applications/?email=${user.email}`, {
+    //   .get(`https://job-square-server.vercel.app/job-applications/?email=${user.email}`, {
     //     withCredentials: true,
     //   })
     //   .then((res) => setJobs(res.data));
@@ -26,6 +25,7 @@ const MyApplications = () => {
     axiosSecure
       .get(`/job-applications/?email=${user.email}`)
       .then((res) => setJobs(res.data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.email]);
 
   console.log(jobs);

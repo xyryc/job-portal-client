@@ -18,7 +18,7 @@ const AddJob = () => {
     newJob.requirements = newJob.requirements.split("\n");
     newJob.responsibilities = newJob.responsibilities.split("\n");
 
-    fetch("http://localhost:5000/jobs", {
+    fetch("https://job-square-server.vercel.app/jobs", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -164,7 +164,9 @@ const AddJob = () => {
             name="currency"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
-            <option value="" disabled>Select Currency</option>
+            <option value="" disabled>
+              Select Currency
+            </option>
             <option value="RUB">Ruble</option>
             <option value="BDT">Taka</option>
             <option value="EUR">Euro</option>
