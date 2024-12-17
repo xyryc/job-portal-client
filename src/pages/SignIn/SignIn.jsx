@@ -6,9 +6,10 @@ import Lottie from "lottie-react";
 import signInLottieData from "../../assets/lottie/signin.json";
 import SocialLogin from "../shared/SocialLogin";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, setLoading } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const SignIn = () => {
         console.log(result.user);
         const user = { email: result.user.email };
         axios
-          .post("https://job-square-server.vercel.app/jwt", user, {
+          .post("http://localhost:5000/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
@@ -39,7 +40,15 @@ const SignIn = () => {
             navigate(from);
           });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: error.code,
+        });
+      });
   };
 
   return (

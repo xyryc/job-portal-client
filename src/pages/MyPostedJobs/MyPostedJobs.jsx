@@ -3,16 +3,48 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Heading from "../shared/Heading";
 import { Link } from "react-router-dom";
+import { FaRegTrashCan } from "react-icons/fa6";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyPostedJobs = () => {
   const [jobs, setJobs] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`https://job-square-server.vercel.app/jobs?email=${user?.email}`)
+    fetch(`http://localhost:5000/jobs?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, [user?.email]);
+
+  const handleDelete = (id) => {
+    console.log(id);
+
+    axios.delete(`http://localhost:5000/job/${id}`).then((res) => {
+      console.log(res.data);
+
+      if (res.data.deletedCount > 0) {
+        const remaining = jobs.filter((job) => job._id !== id);
+        setJobs(remaining);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Deleted successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "Error",
+          title: "Error occured while deleting!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
 
   return (
     <div>
@@ -32,6 +64,7 @@ const MyPostedJobs = () => {
               <th className="text-center">Application Deadline</th>
               <th className="text-center">Applicant Count</th>
               <th className="text-center">Applications</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -74,6 +107,14 @@ const MyPostedJobs = () => {
                   >
                     View Applications
                   </Link>
+                </th>
+                <th>
+                  <button
+                    onClick={() => handleDelete(job._id)}
+                    className="btn btn-ghost btn-sm"
+                  >
+                    <FaRegTrashCan />
+                  </button>
                 </th>
               </tr>
             ))}

@@ -4,10 +4,11 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import registerLottieData from "../../assets/lottie/register.json";
 import AuthContext from "../../context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile, setLoading } = useContext(AuthContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -35,7 +36,15 @@ const Register = () => {
             console.log(error);
           });
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: error.code,
+        });
+      });
   };
 
   return (
