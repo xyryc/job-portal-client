@@ -1,54 +1,21 @@
-import Swal from "sweetalert2";
+import { useLoaderData } from "react-router-dom";
 import Heading from "../shared/Heading";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 
-const AddJob = () => {
+const JobUpdate = () => {
   const { user } = useAuth();
-  const navigate = useNavigate();
-
-  const handleAddJob = (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const initialData = Object.fromEntries(formData.entries());
-
-    const { min, max, currency, ...newJob } = initialData;
-    newJob.salaryRange = { min, max, currency };
-    newJob.requirements = newJob.requirements.split("\n");
-    newJob.responsibilities = newJob.responsibilities.split("\n");
-
-    fetch("https://job-square-server.vercel.app/jobs", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newJob),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Job has been posted",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/myPostedJobs");
-        }
-      });
-  };
+  const jobData = useLoaderData();
+  console.log(jobData);
 
   return (
     <div className="max-w-4xl mx-auto rounded-lg">
       <Heading
-        title={"Post a job"}
-        subTitle={"Fill up the below form and post the job"}
+        title={"Update Job Details"}
+        subTitle={"Modify the form below and submit to update the job details"}
       />
 
       <form
-        onSubmit={handleAddJob}
+        // onSubmit={handleAddJob}
         className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4"
       >
         {/* Job Title */}
@@ -257,7 +224,7 @@ const AddJob = () => {
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition"
           >
-            Submit
+            Update
           </button>
         </div>
       </form>
@@ -265,4 +232,4 @@ const AddJob = () => {
   );
 };
 
-export default AddJob;
+export default JobUpdate;
