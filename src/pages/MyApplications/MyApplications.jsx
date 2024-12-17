@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { FaRegTrashCan } from "react-icons/fa6";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const MyApplications = () => {
   const { user } = useAuth();
@@ -28,7 +30,37 @@ const MyApplications = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.email]);
 
-  console.log(jobs);
+  const handleDelete = (id) => {
+    console.log(id);
+
+    axios
+      .delete(`http://localhost:5000/job-application/delete/${id}`)
+      .then((res) => {
+        console.log(res.data);
+
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Job application deleted successfully!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+
+          const remaining = jobs.filter((job) => job._id !== id);
+          setJobs(remaining);
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "No matching job application found to delete.",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div>
@@ -81,7 +113,10 @@ const MyApplications = () => {
                 </td>
                 <td className="font-medium">{job.hr_name}</td>
                 <th>
-                  <button className="btn btn-ghost btn-sm">
+                  <button
+                    onClick={() => handleDelete(job._id)}
+                    className="btn btn-ghost btn-sm"
+                  >
                     <FaRegTrashCan />
                   </button>
                 </th>

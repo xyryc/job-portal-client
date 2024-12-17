@@ -17,7 +17,7 @@ const MyPostedJobs = () => {
   return (
     <div>
       <Heading
-        title={`My Posted Jobs: ${jobs.length}`}
+        title={`My Posted Jobs: ${jobs?.length}`}
         subTitle={"You can post more jobs from post a job page"}
       />
 
@@ -36,7 +36,7 @@ const MyPostedJobs = () => {
           </thead>
           <tbody>
             {/* row 1 */}
-            {jobs.map((job, index) => (
+            {jobs?.map((job, index) => (
               <tr key={job._id}>
                 <th>{index + 1}</th>
                 <td>

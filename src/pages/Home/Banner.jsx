@@ -7,7 +7,7 @@ import bannerIconBottom from "../../assets/team/icon-bottom-banner.png";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col-reverse md:flex-row justify-center items-center md:gap-10 md:h-[80vh]">
+    <div className="flex flex-col-reverse md:flex-row justify-center items-center lg:gap-10 md:h-[80vh] pt-16">
       <div className="space-y-5 lg:w-[450px] py-6">
         <h1 className="sm:text-5xl text-4xl font-bold">
           The Easiest Way to Get Your New Job
@@ -16,7 +16,9 @@ const Banner = () => {
           Each month, more than 3 million job seekers turn to website in their
           search for work, making over 140,000 applications every single day
         </p>
-        <button className="btn btn-info text-white">Get Started</button>
+        <a href="#latestjobs" className="btn btn-info text-white">
+          Get Started
+        </a>
       </div>
 
       <div className="hidden lg:block relative">

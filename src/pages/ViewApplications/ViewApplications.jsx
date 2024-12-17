@@ -35,7 +35,12 @@ const ViewApplications = () => {
 
   return (
     <div>
-      <Heading title={`Applicants for this job: ${applicationData.length}`} />
+      <Heading
+        title={`Applicants for this job: ${applicationData.length}`}
+        subTitle={
+          "This is the list of all the applicant that has applied for this role"
+        }
+      />
 
       <div className="overflow-x-auto">
         <table className="table">

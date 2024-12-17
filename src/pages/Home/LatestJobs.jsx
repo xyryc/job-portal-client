@@ -12,7 +12,7 @@ const LatestJobs = () => {
   }, []);
 
   return (
-    <div>
+    <div id="latestjobs">
       <div className="py-14">
         <Heading
           title={"Jobs of the day"}
