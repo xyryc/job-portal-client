@@ -9,7 +9,7 @@ const MainLayout = () => {
   const { loading } = useAuth();
 
   return (
-    <div>
+    <div className="font-nato-sans">
       <Navbar />
 
       <ScrollToTop />

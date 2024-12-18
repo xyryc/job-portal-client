@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useLoaderData } from "react-router-dom";
 import Heading from "../shared/Heading";
 import useAuth from "../../hooks/useAuth";
@@ -5,7 +6,24 @@ import useAuth from "../../hooks/useAuth";
 const JobUpdate = () => {
   const { user } = useAuth();
   const jobData = useLoaderData();
-  console.log(jobData);
+  // console.log(jobData);
+
+  const {
+    _id,
+    title,
+    company,
+    company_logo,
+    location,
+    jobType,
+    category,
+    applicationDeadline,
+    description,
+    requirements = requirements[0].split(". ").map((req) => req.trim()),
+    responsibilities,
+    salaryRange,
+  } = jobData;
+
+  console.log(requirements)
 
   return (
     <div className="max-w-4xl mx-auto rounded-lg">
@@ -22,6 +40,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Job Title</label>
           <input
+            defaultValue={title}
             type="text"
             name="title"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -33,6 +52,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Company</label>
           <input
+            defaultValue={company}
             type="text"
             name="company"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -46,6 +66,7 @@ const JobUpdate = () => {
             Company Logo URL
           </label>
           <input
+            defaultValue={company_logo}
             type="url"
             name="company_logo"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -56,6 +77,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Location</label>
           <input
+            defaultValue={location}
             type="text"
             name="location"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -67,7 +89,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Job Type</label>
           <select
-            defaultValue=""
+            defaultValue={jobType}
             name="jobType"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
@@ -85,7 +107,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Category</label>
           <select
-            defaultValue=""
+            defaultValue={category}
             name="category"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
@@ -105,6 +127,7 @@ const JobUpdate = () => {
             Minimum Salary
           </label>
           <input
+            defaultValue={salaryRange.min}
             type="number"
             name="min"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -117,6 +140,7 @@ const JobUpdate = () => {
             Maximum Salary
           </label>
           <input
+            defaultValue={salaryRange.max}
             type="number"
             name="max"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -127,7 +151,7 @@ const JobUpdate = () => {
         <div>
           <label className="block text-gray-700 font-medium">Currency</label>
           <select
-            defaultValue=""
+            defaultValue={salaryRange.currency}
             name="currency"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
           >
@@ -159,6 +183,7 @@ const JobUpdate = () => {
         <div className="md:col-span-2">
           <label className="block text-gray-700 font-medium">Description</label>
           <textarea
+            defaultValue={description}
             placeholder="Enter your job description here"
             name="description"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -172,6 +197,7 @@ const JobUpdate = () => {
             Requirements
           </label>
           <textarea
+            defaultValue={requirements}
             placeholder="Write each requirements in new line"
             name="requirements"
             className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:ring-blue-500 focus:border-blue-500"

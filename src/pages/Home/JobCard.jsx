@@ -17,7 +17,9 @@ const JobCard = ({ job }) => {
     company,
     salaryRange,
     requirements,
+    applicationDeadline
   } = job;
+  console.log(job)
 
   return (
     <div className="p-3 border border-gray-300 rounded-lg flex flex-col">
@@ -45,7 +47,7 @@ const JobCard = ({ job }) => {
 
         <span className="flex items-center gap-1">
           <IoMdTime />
-          Time
+          {applicationDeadline}
         </span>
       </div>
 
@@ -60,8 +62,8 @@ const JobCard = ({ job }) => {
       </p>
 
       <div className="flex  items-center justify-between mt-4">
-        <div className="text-sm flex items-center">
-          Salary: <TbCurrencyTaka />
+        <div className="text-xs flex items-center">
+          <span className="font-medium">Salary:</span> <TbCurrencyTaka />
           {salaryRange.min} - <TbCurrencyTaka />
           {salaryRange.max}
           <span className="capitalize">{salaryRange.currency}</span>
