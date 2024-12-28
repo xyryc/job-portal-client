@@ -11,6 +11,7 @@ import AddJob from "../pages/AddJob/AddJob";
 import MyPostedJobs from "../pages/MyPostedJobs/MyPostedJobs";
 import ViewApplications from "../pages/ViewApplications/ViewApplications";
 import JobUpdate from "../pages/JobUpdate/JobUpdate";
+import AllJobs from "../pages/AllJobs.jsx/AllJobs";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/jobs",
+        element: <AllJobs />,
+      },
+      {
         path: "/jobs/:id",
         element: (
           <PrivateRoute>
@@ -30,7 +35,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
+          fetch(`https://job-square-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/myPostedJobs/update/:id",
@@ -40,7 +45,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/jobs/${params.id}`),
+          fetch(`https://job-square-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/jobs/jobApply/:id",
@@ -82,7 +87,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/job-applications/jobs/${params.job_id}`),
+          fetch(
+            `https://job-square-server.vercel.app/job-applications/jobs/${params.job_id}`
+          ),
       },
 
       {

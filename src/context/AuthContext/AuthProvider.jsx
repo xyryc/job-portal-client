@@ -46,22 +46,26 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log("State captured", currentUser?.email);
+      // console.log("State captured", currentUser?.email);
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post("https://job-square-server.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             setLoading(false);
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", {}, { withCredentials: true })
+          .post(
+            "https://job-square-server.vercel.app/logout",
+            {},
+            { withCredentials: true }
+          )
           .then((res) => {
-            console.log("logout", res.data);
+            // console.log("logout", res.data);
             setLoading(false);
           });
       }

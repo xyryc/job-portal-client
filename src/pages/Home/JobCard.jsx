@@ -17,9 +17,8 @@ const JobCard = ({ job }) => {
     company,
     salaryRange,
     requirements,
-    applicationDeadline
+    applicationDeadline,
   } = job;
-  console.log(job)
 
   return (
     <div className="p-3 border border-gray-300 rounded-lg flex flex-col">

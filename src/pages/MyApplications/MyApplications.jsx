@@ -4,6 +4,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Heading from "../shared/Heading";
 
 const MyApplications = () => {
   const { user } = useAuth();
@@ -12,14 +13,14 @@ const MyApplications = () => {
   const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    // fetch(`http://localhost:5000/job-applications/?email=${user.email}`)
+    // fetch(`https://job-square-server.vercel.app/job-applications/?email=${user.email}`)
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setJobs(data);
     //   });
 
     // axios
-    //   .get(`http://localhost:5000/job-applications/?email=${user.email}`, {
+    //   .get(`https://job-square-server.vercel.app/job-applications/?email=${user.email}`, {
     //     withCredentials: true,
     //   })
     //   .then((res) => setJobs(res.data));
@@ -34,7 +35,9 @@ const MyApplications = () => {
     console.log(id);
 
     axios
-      .delete(`http://localhost:5000/job-application/delete/${id}`)
+      .delete(
+        `https://job-square-server.vercel.app/job-application/delete/${id}`
+      )
       .then((res) => {
         console.log(res.data);
 
@@ -64,9 +67,10 @@ const MyApplications = () => {
 
   return (
     <div>
-      <h1 className="my-3 font-bold text-xl text-center">
-        Applied Jobs: {jobs.length}
-      </h1>
+      <Heading
+        title={`Applied Jobs: ${jobs.length}`}
+        subTitle={"List of all of the jobs you have applied"}
+      />
 
       <div className="overflow-x-auto">
         <table className="table">
