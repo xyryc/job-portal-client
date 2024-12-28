@@ -5,9 +5,8 @@ import Heading from "../shared/Heading";
 import Loading from "../shared/Loading";
 
 const AllJobs = () => {
-  const { jobs, loading } = useJobs();
-  const [sort, setSort] = useState(false);
-  console.log(sort);
+    const [sort, setSort] = useState(false);
+    const { jobs, loading } = useJobs(sort);
 
   return (
     <div>
@@ -21,8 +20,11 @@ const AllJobs = () => {
       </div>
 
       <div className="mb-3">
-        <button onClick={() => setSort(!sort)} className="btn btn-neutral">
-          Sort by Salary
+        <button
+          onClick={() => setSort(!sort)}
+          className={`btn btn-neutral ${sort && "btn-info text-white"}`}
+        >
+          {sort ? "Sorted by Salary" : "Sort by Salary"}
         </button>
       </div>
 
