@@ -68,7 +68,7 @@ const Navbar = () => {
           </ul>
         </div>
         <Link to={"/"} className="btn btn-ghost text-xl font-extrabold">
-          <img src={brandLogo} alt="JobSquare" className="w-8" /> JobSquare
+          <img src={brandLogo} alt="JobSquare" className="w-8 hidden sm:block" /> JobSquare
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -77,6 +77,14 @@ const Navbar = () => {
       <div className="navbar-end">
         {user ? (
           <>
+            <img
+              referrerPolicy="no-referrer"
+              alt="User Profile Photo"
+              src={user?.photoURL}
+              className="w-10 h-10 rounded-full mr-3"
+              title={user?.displayName}
+            />
+
             <button
               className="btn btn-outline btn-info btn-sm"
               onClick={handleSignOut}

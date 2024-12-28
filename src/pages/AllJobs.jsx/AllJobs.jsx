@@ -7,7 +7,10 @@ import Loading from "../shared/Loading";
 const AllJobs = () => {
   const [sort, setSort] = useState(false);
   const [search, setSearch] = useState("");
-  const { jobs, loading } = useJobs(sort, search);
+  const [minSalary, setMinSalary] = useState("");
+  const [maxSalary, setMaxSalary] = useState("");
+  const { jobs, loading } = useJobs(sort, search, minSalary, maxSalary);
+  console.log(jobs);
 
   return (
     <div>
@@ -20,7 +23,7 @@ const AllJobs = () => {
         />
       </div>
 
-      <div className="mb-3 max-w-md mx-auto space-x-2">
+      <div className="mb-3 max-w-md mx-auto flex flex-col lg:flex-row items-center gap-3 justify-center px-4">
         <button
           onClick={() => setSort(!sort)}
           className={`btn btn-neutral ${sort && "btn-info text-white"}`}
@@ -32,8 +35,24 @@ const AllJobs = () => {
           onKeyUp={(e) => setSearch(e.target.value)}
           type="text"
           placeholder="Search jobs by title"
-          className="py-3 px-4"
+          className="py-3 px-4 border border-neutral rounded-md"
         />
+
+        <div className="flex flex-col sm:flex-row items-center gap-2">
+          <input
+            onKeyUp={(e) => setMinSalary(e.target.value)}
+            type="text"
+            placeholder="Min Salary"
+            className="py-3 px-4 border border-neutral rounded-md"
+          />
+
+          <input
+            onKeyUp={(e) => setMaxSalary(e.target.value)}
+            type="text"
+            placeholder="Max Salary"
+            className="py-3 px-4 border border-neutral rounded-md"
+          />
+        </div>
       </div>
 
       {loading ? (
