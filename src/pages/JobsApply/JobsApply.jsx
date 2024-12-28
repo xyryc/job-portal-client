@@ -23,7 +23,7 @@ const JobsApply = () => {
       resume,
     };
 
-    fetch("https://job-square-server.vercel.app/job-applications", {
+    fetch("http://localhost:5000/job-applications", {
       method: "POST",
       headers: {
         "content-type": "application/json",

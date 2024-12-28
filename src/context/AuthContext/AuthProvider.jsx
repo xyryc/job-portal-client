@@ -50,7 +50,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const user = { email: currentUser.email };
         axios
-          .post("https://job-square-server.vercel.app/jwt", user, {
+          .post("http://localhost:5000/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
@@ -59,11 +59,7 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         axios
-          .post(
-            "https://job-square-server.vercel.app/logout",
-            {},
-            { withCredentials: true }
-          )
+          .post("http://localhost:5000/logout", {}, { withCredentials: true })
           .then((res) => {
             // console.log("logout", res.data);
             setLoading(false);

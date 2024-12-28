@@ -5,8 +5,9 @@ import Heading from "../shared/Heading";
 import Loading from "../shared/Loading";
 
 const AllJobs = () => {
-    const [sort, setSort] = useState(false);
-    const { jobs, loading } = useJobs(sort);
+  const [sort, setSort] = useState(false);
+  const [search, setSearch] = useState("");
+  const { jobs, loading } = useJobs(sort, search);
 
   return (
     <div>
@@ -19,13 +20,20 @@ const AllJobs = () => {
         />
       </div>
 
-      <div className="mb-3">
+      <div className="mb-3 max-w-md mx-auto space-x-2">
         <button
           onClick={() => setSort(!sort)}
           className={`btn btn-neutral ${sort && "btn-info text-white"}`}
         >
           {sort ? "Sorted by Salary" : "Sort by Salary"}
         </button>
+
+        <input
+          onKeyUp={(e) => setSearch(e.target.value)}
+          type="text"
+          placeholder="Search jobs by title"
+          className="py-3 px-4"
+        />
       </div>
 
       {loading ? (

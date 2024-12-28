@@ -13,36 +13,34 @@ const MyPostedJobs = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`https://job-square-server.vercel.app/jobs?email=${user?.email}`)
+    fetch(`http://localhost:5000/jobs?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, [user?.email]);
 
   const handleDelete = (id) => {
-    axios
-      .delete(`https://job-square-server.vercel.app/job/${id}`)
-      .then((res) => {
-        if (res.data.deletedCount > 0) {
-          const remaining = jobs.filter((job) => job._id !== id);
-          setJobs(remaining);
+    axios.delete(`http://localhost:5000/job/${id}`).then((res) => {
+      if (res.data.deletedCount > 0) {
+        const remaining = jobs.filter((job) => job._id !== id);
+        setJobs(remaining);
 
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "Deleted successfully!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        } else {
-          Swal.fire({
-            position: "center",
-            icon: "Error",
-            title: "Error occured while deleting!",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-        }
-      });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Deleted successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "Error",
+          title: "Error occured while deleting!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   return (
